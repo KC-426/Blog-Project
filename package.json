@@ -1,12 +1,11 @@
 {
-  "name": "abc",
+  "name": "Blog-project",
   "version": "1.0.0",
   "description": "",
-  "main": "a.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js",
-    "start-server": "Nodemon app.js"
+    "start": "nodemon app.js"
   },
   "keywords": [],
   "author": "",
