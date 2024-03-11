@@ -17,8 +17,8 @@ app.use(cookieParser());
 
 app.use(bodyParser.json());
 
-app.use("/auth", authRoutes);
-app.use("/blog", blogRoutes);
+app.use(authRoutes);
+app.use(blogRoutes);
 
 mongoose
   .connect(MONGOD_URI, { useNewUrlParser: true, useUnifiedTopology: true })

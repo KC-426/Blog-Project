@@ -16,6 +16,9 @@ const upload = multer({ storage: storage });
 const router = express.Router()
 
 router.post('/create_blog', upload.single('file'), userAuth, blogController.createBlog)
+router.post("/like_blog/:id", blogController.likeBlog)
+router.post("/share_blog/:id", blogController.shareBlog)
+router.post("/comment_on_blog/:id", blogController.commentOnBlog)
 router.get('/retrieve_blog',userAuth, blogController.retrieveBlog)
 router.get("/get_blog/:id",userAuth, blogController.getBlogById)
 router.delete('/delete_blog/:id',userAuth, blogController.deleteBlog)

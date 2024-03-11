@@ -16,8 +16,36 @@ const blogSchema = new mongoose.Schema(
       },
     },
     blogName: {
-      type: String
+      type: String,
     },
+    likes: {
+      type: Number,
+      default: 0,
+    },
+    shares: {
+      type: Number,
+      default: 0,
+    },
+    comments: [
+      {
+        commentedBy: {
+          type: String,
+        },
+        commentedData: {
+          type: String,
+        },
+        reply: [
+          {
+            repliedBy: {
+              type: String,
+            },
+            repliedData: {
+              type: String,
+            },
+          },
+        ],
+      },
+    ],
   },
   { timestamps: true }
 );
