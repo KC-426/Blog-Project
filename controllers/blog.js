@@ -86,9 +86,37 @@ const commentOnBlog = async (req, res) => {
 
     findBlog.comments.push(newComment);
     const result = await findBlog.save();
- 
-    console.log(result)
+
+    console.log(result);
     res.status(201).json({ message: "Comment added successfully !", result });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: "Internal server error !!" });
+  }
+};
+
+const addReplyOnComment = async (req, res) => {
+  const {id, commentId } = req.params
+  const {repliedBy, repliedData} = req.body
+  try {
+    const findBlog = await BlogSchema.findById(id);
+    if (!findBlog) {
+      return res.status(404).json({ message: "No blog found!" });
+    }
+
+    const findComment = findBlog.comments.find(comment => comment._id.toString() === commentId);
+    if (!findComment) {
+      return res.status(404).json({ message: "No comment found!" });
+    }
+
+    const newReply = {
+      repliedBy: repliedBy,
+      repliedData: repliedData
+    }
+ 
+    findComment.reply.push(newReply)
+    await findBlog.save()
+    return res.status(201).json({message: "Reply added to the commment !", findBlog})
   } catch (err) {
     console.error(err);
     return res.status(500).json({ message: "Internal server error !!" });
@@ -166,6 +194,7 @@ exports.createBlog = createBlog;
 exports.likeBlog = likeBlog;
 exports.shareBlog = shareBlog;
 exports.commentOnBlog = commentOnBlog;
+exports.addReplyOnComment = addReplyOnComment;
 exports.retrieveBlog = retrieveBlog;
 exports.getBlogById = getBlogById;
 exports.deleteBlog = deleteBlog;

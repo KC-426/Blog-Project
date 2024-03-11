@@ -19,6 +19,7 @@ router.post('/create_blog', upload.single('file'), userAuth, blogController.crea
 router.post("/like_blog/:id", blogController.likeBlog)
 router.post("/share_blog/:id", blogController.shareBlog)
 router.post("/comment_on_blog/:id", blogController.commentOnBlog)
+router.post("/reply_on_comment/:id/:commentId", blogController.addReplyOnComment)
 router.get('/retrieve_blog',userAuth, blogController.retrieveBlog)
 router.get("/get_blog/:id",userAuth, blogController.getBlogById)
 router.delete('/delete_blog/:id',userAuth, blogController.deleteBlog)
