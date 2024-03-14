@@ -20,6 +20,11 @@ app.use(bodyParser.json());
 app.use(authRoutes);
 app.use(blogRoutes);
 
+app.use("/", (req, res) => {
+  console.log("Working ");
+  res.send("WORKING");
+});
+
 mongoose
   .connect(MONGOD_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
